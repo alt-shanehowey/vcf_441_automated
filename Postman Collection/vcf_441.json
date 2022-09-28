@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "ab138d13-225f-412d-abb4-3ab9bfb67f59",
-		"name": "VCF 4.4",
+		"name": "VCF 4.4 (Day One)",
 		"description": "VMware vRealize Life Cycle Manager Public API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
