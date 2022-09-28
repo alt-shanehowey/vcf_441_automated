@@ -204,7 +204,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"edgeClusterId\" : \"{{SDDC_EC_ID}}\",\n  \"avns\" : [ {\n    \"name\" : \"altlab-avn-areg\",\n    \"regionType\" : \"REGION_A\",\n    \"subnet\" : \"10.10.20.0\",\n    \"subnetMask\" : \"255.255.255.0\",\n    \"gateway\" : \"10.10.20.1\",\n    \"mtu\" : 9000,\n    \"routerName\" : \"altlab-m1-t1\"\n  }, {\n    \"name\" : \"altlab-avn-xreg\",\n    \"regionType\" : \"X_REGION\",\n    \"subnet\" : \"10.10.30.0\",\n    \"subnetMask\" : \"255.255.255.0\",\n    \"gateway\" : \"10.10.30.1\",\n    \"mtu\" : 9000,\n    \"routerName\" : \"altlab-m1-t1\"\n  } ]\n}"
+									"raw": "{\n  \"edgeClusterId\" : \"{{SDDC_EC_ID}}\",\n  \"avns\" : [ {\n    \"name\" : \"{{avn0_name}}\",\n    \"regionType\" : \"{{avn0_region}}\",\n    \"subnet\" : \"{{avn0_subnet}}\",\n    \"subnetMask\" : \"{{avn0_subnet_mask}}\",\n    \"gateway\" : \"{{avn0_gateway}}\",\n    \"mtu\" : 9000,\n    \"routerName\" : \"{{avn0_router_name}}\"\n  }, {\n    \"name\" : \"{{avn1_name}}\",\n    \"regionType\" : \"{{avn1_region}}\",\n    \"subnet\" : \"{{avn1_subnet}}\",\n    \"subnetMask\" : \"{{avn1_subnet_mask}}\",\n    \"gateway\" : \"{{avn1_gateway}}\",\n    \"mtu\" : 9000,\n    \"routerName\" : \"{{avn1_router_name}}\"\n  } ]\n}"
 								},
 								"url": "{{SDDC_URL}}/v1/avns/"
 							},
