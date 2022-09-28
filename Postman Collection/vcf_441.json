@@ -4368,24 +4368,6 @@
 					}
 				}
 			]
-		},
-		{
-			"name": "OVF",
-			"item": [
-				{
-					"name": "New Request",
-					"id": "8f3640f0-5fd3-405f-abb1-e9ef4e3b80aa",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": []
-					},
-					"response": []
-				}
-			],
-			"id": "e0444f24-7d7e-4f3d-a69a-48759472a78a"
 		}
 	],
 	"event": [
