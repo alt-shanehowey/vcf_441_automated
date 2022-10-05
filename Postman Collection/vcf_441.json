@@ -67,7 +67,7 @@
 								"value": "application/json"
 							}
 						],
-						"url": "{{CB_URL}}/v1/sddcs/validations/c079b782-1d6e-403c-8603-29584acbdd90"
+						"url": "{{CB_URL}}/v1/sddcs/validations/c60b75b8-b1a9-465f-8fd9-6d3fec4c5e8e"
 					},
 					"response": []
 				},
