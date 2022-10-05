@@ -1,0 +1,383 @@
+{
+	"info": {
+		"_postman_id": "ab138d13-225f-412d-abb4-3ab9bfb67f59",
+		"name": "VCF 4.4 (Day One)",
+		"description": "VMware vRealize Life Cycle Manager Public API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CloudBuilder",
+			"item": [
+				{
+					"name": "Validate SDDC JSON",
+					"id": "f9070eb0-25ff-482e-8f9e-4373a0ee4e4f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"password": "F@tality123!",
+								"username": "admin"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"skipEsxThumbprintValidation\": true,\n  \"managementPoolName\": \"{{np1_mgmt}}\",\n  \"sddcManagerSpec\": {\n    \"secondUserCredentials\": {\n      \"username\": \"vcf\",\n      \"password\": \"{{default_password}}\"\n    },\n    \"ipAddress\": \"{{sddcm_ip}}\",\n    \"netmask\": \"{{sddcm_subnet}}\",\n    \"hostname\": \"{{sddcm_host_short}}\",\n    \"licenseKey\": \"{{sddcm_licensekey}}\",\n    \"rootUserCredentials\": {\n      \"username\": \"root\",\n      \"password\": \"{{default_password}}\"\n    },\n    \"localUserPassword\": \"{{default_password}}\",\n    \"vcenterId\": \"{{mgmt_vc_id}}\"\n  },\n  \"sddcId\": \"{{sddcm_sddcid}}\",\n  \"esxLicense\": \"{{esxi_license}}\",\n  \"taskName\": \"workflowconfig/workflowspec-ems.json\",\n  \"ceipEnabled\": \"{{set_ceip}}\",\n  \"fipsEnabled\": \"{{set_fips}}\",\n  \"ntpServers\": [\"{{ntps_primary}}\", \"{{ntps_secondary}}\"],\n  \"dnsSpec\": {\n    \"secondaryNameserver\": \"{{dns_secondaryns}}\",\n    \"subdomain\": \"{{dns_subdomain}}\",\n    \"domain\": \"{{dns_domainname}}\",\n    \"nameserver\": \"{{dns_primaryns}}\"\n  },\n  \"networkSpecs\": [\n    {\n      \"networkType\": \"MANAGEMENT\",\n      \"subnet\": \"{{net_mgmt_subnet}}\",\n      \"gateway\": \"{{net_mgmt_gateway}}\",\n      \"vlanId\": \"{{net_mgmt_vlan}}\",\n      \"mtu\": \"{{net_mgmt_mtu}}\",\n      \"portGroupKey\": \"{{net_mgmt_pg_name}}\",\n      \"standbyUplinks\":[],\n      \"activeUplinks\":[\n        \"uplink1\",\n        \"uplink2\"\n      ]\n    },\n    {\n      \"networkType\": \"VMOTION\",\n      \"subnet\": \"{{net_vmotion_subnet}}\",\n      \"gateway\": \"{{net_vmotion_gateway}}\",\n      \"vlanId\": \"{{net_vmotion_vlanid}}\",\n      \"mtu\": \"{{net_vmotion_mtu}}\",\n      \"portGroupKey\": \"{{net_vmotion_pg_name}}\",\n      \"association\": \"{{vc_datacenter_name}}\",\n      \"includeIpAddressRanges\": [{\"endIpAddress\": \"{{net_vmotion_ipend}}\", \"startIpAddress\": \"{{net_vmotion_ipstart}}\"}],\n      \"standbyUplinks\":[],\n      \"activeUplinks\":[\n        \"uplink1\",\n        \"uplink2\"\n      ]\n    },\n    {\n      \"networkType\": \"VSAN\",\n      \"subnet\": \"{{net_vsan_subnet}}\",\n      \"gateway\": \"{{net_vsan_gateway}}\",\n      \"vlanId\": \"{{net_vsan_vlanid}}\",\n      \"mtu\": \"{{net_vsan_mtu}}\",\n      \"portGroupKey\": \"{{net_vsan_pg_name}}\",\n      \"includeIpAddressRanges\": [{\"endIpAddress\": \"{{net_vsan_ipend}}\", \"startIpAddress\": \"{{net_vsan_ipstart}}\"}],\n      \"standbyUplinks\":[],\n      \"activeUplinks\":[\n        \"uplink1\",\n        \"uplink2\"\n      ]\n    }\n  ],\n  \"nsxtSpec\":\n  {\n    \"nsxtManagerSize\": \"{{nsxt_m_size}}\",\n    \"nsxtManagers\": [\n      {\n          \"hostname\": \"{{nsxt_m1_hostname_short}}\",\n          \"ip\": \"{{nsxt_m1_ip}}\"\n      },\n      {\n          \"hostname\": \"{{nsxt_m2_hostname_short}}\",\n          \"ip\": \"{{nsxt_m2_ip}}\"\n      },\n      {\n          \"hostname\": \"{{nsxt_m3_hostname_short}}\",\n          \"ip\": \"{{nsxt_m3_ip}}\"\n      }\n    ],\n    \"rootNsxtManagerPassword\": \"{{default_password}}\",\n    \"nsxtAdminPassword\": \"{{default_password}}\",\n    \"nsxtAuditPassword\": \"{{default_password}}\",\n    \"rootLoginEnabledForNsxtManager\": \"true\",\n    \"sshEnabledForNsxtManager\": \"true\",\n    \"overLayTransportZone\": {\n        \"zoneName\": \"{{nsxt_tz_overlayname}}\",\n        \"networkName\": \"{{nsxt_tz_overlaynetworkname}}\"\n    },\n    \"vlanTransportZone\": {\n        \"zoneName\": \"{{nsxt_tz_vlanname}}\",\n        \"networkName\": \"{{nsxt_tz_vlannetworkname}}\"\n    },\n    \"vip\": \"{{nsxt_vip_name}}\",\n    \"vipFqdn\": \"{{nsxt_vip_fqdn}}\",\n    \"nsxtLicense\": \"{{nsxt_licensekey}}\",\n    \"transportVlanId\": \"{{nsxt_htep_vlanid}}\",\n    \"ipAddressPoolSpec\": {\n       \"name\": \"{{nsxt_np2_htep_name}}\",\n       \"description\": \"{{nsxt_np2_htep_desc}}\",\n       \"subnets\":[\n          {\n             \"ipAddressPoolRanges\":[\n                {\n                   \"start\": \"{{net_htep_ipstart}}\",\n                   \"end\": \"{{net_htep_ipend}}\"\n                }\n             ],\n             \"cidr\": \"{{net_htep_cidr}}\",\n             \"gateway\": \"{{net_htep_gateway}}\"\n          }\n       ]\n    }\n  },\n  \"vsanSpec\": {\n      \"vsanName\": \"{{vsan_spec_name}}\",\n      \"licenseFile\": \"{{vsan_licensekey}}\",\n      \"vsanDedup\": \"{{set_vsan_dedupe}}\",\n      \"datastoreName\": \"{{vsan_dsname}}\"\n  },\n  \"dvSwitchVersion\": \"{{vds1_version}}\",\n  \"dvsSpecs\": [\n    {\n      \"dvsName\": \"{{vds1_dvsname}}\",\n      \"vcenterId\":\"{{vds1_vcenterid}}\",\n      \"vmnics\": [\n        \"vmnic6\",\n        \"vmnic7\"\n      ],\n      \"mtu\": \"{{vds1_mtu}}\",\n      \"networks\":[\n        \"MANAGEMENT\",\n        \"VMOTION\",\n        \"VSAN\"\n      ],\n      \"niocSpecs\":[\n        {\n          \"trafficType\":\"VSAN\",\n          \"value\":\"HIGH\"\n        },\n        {\n          \"trafficType\":\"VMOTION\",\n          \"value\":\"LOW\"\n        },\n        {\n          \"trafficType\":\"VDP\",\n          \"value\":\"LOW\"\n        },\n        {\n          \"trafficType\":\"VIRTUALMACHINE\",\n          \"value\":\"HIGH\"\n        },\n        {\n          \"trafficType\":\"MANAGEMENT\",\n          \"value\":\"NORMAL\"\n        },\n        {\n          \"trafficType\":\"NFS\",\n          \"value\":\"LOW\"\n        },\n        {\n          \"trafficType\":\"HBR\",\n          \"value\":\"LOW\"\n        },\n        {\n          \"trafficType\":\"FAULTTOLERANCE\",\n          \"value\":\"LOW\"\n        },\n        {\n          \"trafficType\":\"ISCSI\",\n          \"value\":\"LOW\"\n        }\n      ],\n      \"isUsedByNsxt\": \"{{vds1_set_isnsxt}}\"\n    }\n  ],\n  \"clusterSpec\":\n  {\n    \"clusterName\": \"{{vc_mgmt_clustername}}\",\n    \"vcenterName\": \"{{vc_spec_name}}\",\n    \"clusterEvcMode\": \"{{vc_evcmode}}\",\n    \"vmFolders\": {\n      \"MANAGEMENT\": \"{{vmfolder_mgmt}}\",\n      \"NETWORKING\": \"{{vmfolder_net}}\",\n      \"EDGENODES\": \"{{vmfolder_edge}}\"\n    },\n    \"resourcePoolSpecs\": [{\n      \"name\": \"{{rps_mgmt_name}}\",\n      \"type\": \"management\",\n      \"cpuReservationPercentage\": 0,\n      \"cpuLimit\": -1,\n      \"cpuReservationExpandable\": true,\n      \"cpuSharesLevel\": \"normal\",\n      \"cpuSharesValue\": 0,\n      \"memoryReservationMb\": 0,\n      \"memoryLimit\": -1,\n      \"memoryReservationExpandable\": true,\n      \"memorySharesLevel\": \"normal\",\n      \"memorySharesValue\": 0\n    }, {\n      \"name\": \"{{rps_mgmt_net}}\",\n      \"type\": \"network\",\n      \"cpuReservationPercentage\": 0,\n      \"cpuLimit\": -1,\n      \"cpuReservationExpandable\": true,\n      \"cpuSharesLevel\": \"normal\",\n      \"cpuSharesValue\": 0,\n      \"memoryReservationPercentage\": 0,\n      \"memoryLimit\": -1,\n      \"memoryReservationExpandable\": true,\n      \"memorySharesLevel\": \"normal\",\n      \"memorySharesValue\": 0\n    }, {\n      \"name\": \"{{rp_usr_edge}}\",\n      \"type\": \"compute\",\n      \"cpuReservationPercentage\": 0,\n      \"cpuLimit\": -1,\n      \"cpuReservationExpandable\": true,\n      \"cpuSharesLevel\": \"normal\",\n      \"cpuSharesValue\": 0,\n      \"memoryReservationPercentage\": 0,\n      \"memoryLimit\": -1,\n      \"memoryReservationExpandable\": true,\n      \"memorySharesLevel\": \"normal\",\n      \"memorySharesValue\": 0\n    }, {\n      \"name\": \"{{rp_usr_vm}}\",\n      \"type\": \"compute\",\n      \"cpuReservationPercentage\": 0,\n      \"cpuLimit\": -1,\n      \"cpuReservationExpandable\": true,\n      \"cpuSharesLevel\": \"normal\",\n      \"cpuSharesValue\": 0,\n      \"memoryReservationPercentage\": 0,\n      \"memoryLimit\": -1,\n      \"memoryReservationExpandable\": true,\n      \"memorySharesLevel\": \"normal\",\n      \"memorySharesValue\": 0\n    }]\n  },\n  \"pscSpecs\": [\n    {\n      \"pscId\": \"{{psc_spec_name}}\",\n      \"vcenterId\": \"{{vc_spec_name}}\",\n      \"adminUserSsoPassword\": \"{{default_password}}\",\n      \"pscSsoSpec\": {\n        \"ssoDomain\": \"vsphere.local\"\n      }\n    }\n  ],\n  \"vcenterSpec\": {\n      \"vcenterIp\": \"{{vc_mgmt_ip}}\",\n      \"vcenterHostname\": \"{{vc_mgmt_hostname_short}}\",\n      \"vcenterId\": \"{{vc_spec_name}}\",\n      \"licenseFile\": \"{{vc_licensekey}}\",\n      \"vmSize\": \"{{vc_vmsize}}\",\n      \"storageSize\": \"{{vc_storagesize}}\",\n      \"rootVcenterPassword\": \"{{default_password}}\"\n  },\n  \"hostSpecs\": [\n    {\n      \"association\": \"{{vc_datacenter_name}}\",\n      \"ipAddressPrivate\": {\n        \"ipAddress\": \"{{host1_mgmt_ip}}\"\n      },\n      \"hostname\": \"{{host1_hostname_short}}\",\n      \"credentials\": {\n        \"username\": \"root\",\n        \"password\": \"{{default_password}}\"\n      },\n      \"vSwitch\": \"{{esxi_vss_name}}\",\n      \"serverId\": \"{{host1_server_id}}\"\n    },\n    {\n      \"association\": \"{{vc_datacenter_name}}\",\n      \"ipAddressPrivate\": {\n        \"ipAddress\": \"{{host2_mgmt_ip}}\"\n      },\n      \"hostname\": \"{{host2_hostname_short}}\",\n      \"credentials\": {\n        \"username\": \"root\",\n        \"password\": \"{{default_password}}\"\n      },\n      \"vSwitch\": \"{{esxi_vss_name}}\",\n      \"serverId\": \"{{host2_server_id}}\"\n    },\n    {\n      \"association\": \"{{vc_datacenter_name}}\",\n      \"ipAddressPrivate\": {\n        \"ipAddress\": \"{{host3_mgmt_ip}}\"\n      },\n      \"hostname\": \"{{host3_hostname_short}}\",\n      \"credentials\": {\n        \"username\": \"root\",\n        \"password\": \"{{default_password}}\"\n      },\n      \"vSwitch\": \"{{esxi_vss_name}}\",\n      \"serverId\": \"{{host3_server_id}}\"\n    },\n    {\n      \"association\": \"{{vc_datacenter_name}}\",\n      \"ipAddressPrivate\": {\n        \"ipAddress\": \"{{host4_mgmt_ip}}\"\n      },\n      \"hostname\": \"{{host4_hostname_short}}\",\n      \"credentials\": {\n        \"username\": \"root\",\n        \"password\": \"{{default_password}}\"\n      },\n      \"vSwitch\": \"{{esxi_vss_name}}\",\n      \"serverId\": \"{{host4_server_id}}\"\n    }\n  ],\n  \"excludedComponents\": [\"AVN\", \"EBGP\"]\n}"
+						},
+						"url": "{{CB_URL}}/v1/sddcs/validations/"
+					},
+					"response": []
+				},
+				{
+					"name": "Validate SDDC JSON Check",
+					"id": "7f2b851f-441d-42e3-ab1b-c07205a4b296",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"password": "F@tality123!",
+								"username": "admin"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"skipEsxThumbprintValidation\": true,\n  \"managementPoolName\": \"{{np1_mgmt}}\",\n  \"sddcManagerSpec\": {\n    \"secondUserCredentials\": {\n      \"username\": \"vcf\",\n      \"password\": \"{{default_password}}\"\n    },\n    \"ipAddress\": \"{{sddcm_ip}}\",\n    \"netmask\": \"{{sddcm_subnet}}\",\n    \"hostname\": \"{{sddcm_host_short}}\",\n    \"licenseKey\": \"{{sddcm_licensekey}}\",\n    \"rootUserCredentials\": {\n      \"username\": \"root\",\n      \"password\": \"{{default_password}}\"\n    },\n    \"localUserPassword\": \"{{default_password}}\",\n    \"vcenterId\": \"{{mgmt_vc_id}}\"\n  },\n  \"sddcId\": \"{{sddcm_sddcid}}\",\n  \"esxLicense\": \"{{esxi_license}}\",\n  \"taskName\": \"workflowconfig/workflowspec-ems.json\",\n  \"ceipEnabled\": \"{{set_ceip}}\",\n  \"fipsEnabled\": \"{{set_fips}}\",\n  \"ntpServers\": [\"{{ntps_primary}}\", \"{{ntps_secondary}}\"],\n  \"dnsSpec\": {\n    \"secondaryNameserver\": \"{{dns_secondaryns}}\",\n    \"subdomain\": \"{{dns_subdomain}}\",\n    \"domain\": \"{{dns_domainname}}\",\n    \"nameserver\": \"{{dns_primaryns}}\"\n  },\n  \"networkSpecs\": [\n    {\n      \"networkType\": \"MANAGEMENT\",\n      \"subnet\": \"{{net_mgmt_subnet}}\",\n      \"gateway\": \"{{net_mgmt_gateway}}\",\n      \"vlanId\": \"{{net_mgmt_vlan}}\",\n      \"mtu\": \"{{net_mgmt_mtu}}\",\n      \"portGroupKey\": \"{{net_mgmt_pg_name}}\",\n      \"standbyUplinks\":[],\n      \"activeUplinks\":[\n        \"uplink1\",\n        \"uplink2\"\n      ]\n    },\n    {\n      \"networkType\": \"VMOTION\",\n      \"subnet\": \"{{net_vmotion_subnet}}\",\n      \"gateway\": \"{{net_vmotion_gateway}}\",\n      \"vlanId\": \"{{net_vmotion_vlanid}}\",\n      \"mtu\": \"{{net_vmotion_mtu}}\",\n      \"portGroupKey\": \"{{net_vmotion_pg_name}}\",\n      \"association\": \"{{vc_datacenter_name}}\",\n      \"includeIpAddressRanges\": [{\"endIpAddress\": \"{{net_vmotion_ipend}}\", \"startIpAddress\": \"{{net_vmotion_ipstart}}\"}],\n      \"standbyUplinks\":[],\n      \"activeUplinks\":[\n        \"uplink1\",\n        \"uplink2\"\n      ]\n    },\n    {\n      \"networkType\": \"VSAN\",\n      \"subnet\": \"{{net_vsan_subnet}}\",\n      \"gateway\": \"{{net_vsan_gateway}}\",\n      \"vlanId\": \"{{net_vsan_vlanid}}\",\n      \"mtu\": \"{{net_vsan_mtu}}\",\n      \"portGroupKey\": \"{{net_vsan_pg_name}}\",\n      \"includeIpAddressRanges\": [{\"endIpAddress\": \"{{net_vsan_ipend}}\", \"startIpAddress\": \"{{net_vsan_ipstart}}\"}],\n      \"standbyUplinks\":[],\n      \"activeUplinks\":[\n        \"uplink1\",\n        \"uplink2\"\n      ]\n    }\n  ],\n  \"nsxtSpec\":\n  {\n    \"nsxtManagerSize\": \"{{nsxt_m_size}}\",\n    \"nsxtManagers\": [\n      {\n          \"hostname\": \"{{nsxt_m1_hostname_short}}\",\n          \"ip\": \"{{nsxt_m1_ip}}\"\n      },\n      {\n          \"hostname\": \"{{nsxt_m2_hostname_short}}\",\n          \"ip\": \"{{nsxt_m2_ip}}\"\n      },\n      {\n          \"hostname\": \"{{nsxt_m3_hostname_short}}\",\n          \"ip\": \"{{nsxt_m3_ip}}\"\n      }\n    ],\n    \"rootNsxtManagerPassword\": \"{{default_password}}\",\n    \"nsxtAdminPassword\": \"{{default_password}}\",\n    \"nsxtAuditPassword\": \"{{default_password}}\",\n    \"rootLoginEnabledForNsxtManager\": \"true\",\n    \"sshEnabledForNsxtManager\": \"true\",\n    \"overLayTransportZone\": {\n        \"zoneName\": \"{{nsxt_tz_overlayname}}\",\n        \"networkName\": \"{{nsxt_tz_overlaynetworkname}}\"\n    },\n    \"vlanTransportZone\": {\n        \"zoneName\": \"{{nsxt_tz_vlanname}}\",\n        \"networkName\": \"{{nsxt_tz_vlannetworkname}}\"\n    },\n    \"vip\": \"{{nsxt_vip_name}}\",\n    \"vipFqdn\": \"{{nsxt_vip_fqdn}}\",\n    \"nsxtLicense\": \"{{nsxt_licensekey}}\",\n    \"transportVlanId\": \"{{nsxt_htep_vlanid}}\",\n    \"ipAddressPoolSpec\": {\n       \"name\": \"{{nsxt_np2_htep_name}}\",\n       \"description\": \"{{nsxt_np2_htep_desc}}\",\n       \"subnets\":[\n          {\n             \"ipAddressPoolRanges\":[\n                {\n                   \"start\": \"{{net_htep_ipstart}}\",\n                   \"end\": \"{{net_htep_ipend}}\"\n                }\n             ],\n             \"cidr\": \"{{net_htep_cidr}}\",\n             \"gateway\": \"{{net_htep_gateway}}\"\n          }\n       ]\n    }\n  },\n  \"vsanSpec\": {\n      \"vsanName\": \"{{vsan_spec_name}}\",\n      \"licenseFile\": \"{{vsan_licensekey}}\",\n      \"vsanDedup\": \"{{set_vsan_dedupe}}\",\n      \"datastoreName\": \"{{vsan_dsname}}\"\n  },\n  \"dvSwitchVersion\": \"{{vds1_version}}\",\n  \"dvsSpecs\": [\n    {\n      \"dvsName\": \"{{vds1_dvsname}}\",\n      \"vcenterId\":\"{{vds1_vcenterid}}\",\n      \"vmnics\": [\n        \"vmnic6\",\n        \"vmnic7\"\n      ],\n      \"mtu\": \"{{vds1_mtu}}\",\n      \"networks\":[\n        \"MANAGEMENT\",\n        \"VMOTION\",\n        \"VSAN\"\n      ],\n      \"niocSpecs\":[\n        {\n          \"trafficType\":\"VSAN\",\n          \"value\":\"HIGH\"\n        },\n        {\n          \"trafficType\":\"VMOTION\",\n          \"value\":\"LOW\"\n        },\n        {\n          \"trafficType\":\"VDP\",\n          \"value\":\"LOW\"\n        },\n        {\n          \"trafficType\":\"VIRTUALMACHINE\",\n          \"value\":\"HIGH\"\n        },\n        {\n          \"trafficType\":\"MANAGEMENT\",\n          \"value\":\"NORMAL\"\n        },\n        {\n          \"trafficType\":\"NFS\",\n          \"value\":\"LOW\"\n        },\n        {\n          \"trafficType\":\"HBR\",\n          \"value\":\"LOW\"\n        },\n        {\n          \"trafficType\":\"FAULTTOLERANCE\",\n          \"value\":\"LOW\"\n        },\n        {\n          \"trafficType\":\"ISCSI\",\n          \"value\":\"LOW\"\n        }\n      ],\n      \"isUsedByNsxt\": \"{{vds1_set_isnsxt}}\"\n    }\n  ],\n  \"clusterSpec\":\n  {\n    \"clusterName\": \"{{vc_mgmt_clustername}}\",\n    \"vcenterName\": \"{{vc_spec_name}}\",\n    \"clusterEvcMode\": \"{{vc_evcmode}}\",\n    \"vmFolders\": {\n      \"MANAGEMENT\": \"{{vmfolder_mgmt}}\",\n      \"NETWORKING\": \"{{vmfolder_net}}\",\n      \"EDGENODES\": \"{{vmfolder_edge}}\"\n    },\n    \"resourcePoolSpecs\": [{\n      \"name\": \"{{rps_mgmt_name}}\",\n      \"type\": \"management\",\n      \"cpuReservationPercentage\": 0,\n      \"cpuLimit\": -1,\n      \"cpuReservationExpandable\": true,\n      \"cpuSharesLevel\": \"normal\",\n      \"cpuSharesValue\": 0,\n      \"memoryReservationMb\": 0,\n      \"memoryLimit\": -1,\n      \"memoryReservationExpandable\": true,\n      \"memorySharesLevel\": \"normal\",\n      \"memorySharesValue\": 0\n    }, {\n      \"name\": \"{{rps_mgmt_net}}\",\n      \"type\": \"network\",\n      \"cpuReservationPercentage\": 0,\n      \"cpuLimit\": -1,\n      \"cpuReservationExpandable\": true,\n      \"cpuSharesLevel\": \"normal\",\n      \"cpuSharesValue\": 0,\n      \"memoryReservationPercentage\": 0,\n      \"memoryLimit\": -1,\n      \"memoryReservationExpandable\": true,\n      \"memorySharesLevel\": \"normal\",\n      \"memorySharesValue\": 0\n    }, {\n      \"name\": \"{{rp_usr_edge}}\",\n      \"type\": \"compute\",\n      \"cpuReservationPercentage\": 0,\n      \"cpuLimit\": -1,\n      \"cpuReservationExpandable\": true,\n      \"cpuSharesLevel\": \"normal\",\n      \"cpuSharesValue\": 0,\n      \"memoryReservationPercentage\": 0,\n      \"memoryLimit\": -1,\n      \"memoryReservationExpandable\": true,\n      \"memorySharesLevel\": \"normal\",\n      \"memorySharesValue\": 0\n    }, {\n      \"name\": \"{{rp_usr_vm}}\",\n      \"type\": \"compute\",\n      \"cpuReservationPercentage\": 0,\n      \"cpuLimit\": -1,\n      \"cpuReservationExpandable\": true,\n      \"cpuSharesLevel\": \"normal\",\n      \"cpuSharesValue\": 0,\n      \"memoryReservationPercentage\": 0,\n      \"memoryLimit\": -1,\n      \"memoryReservationExpandable\": true,\n      \"memorySharesLevel\": \"normal\",\n      \"memorySharesValue\": 0\n    }]\n  },\n  \"pscSpecs\": [\n    {\n      \"pscId\": \"{{psc_spec_name}}\",\n      \"vcenterId\": \"{{vc_spec_name}}\",\n      \"adminUserSsoPassword\": \"{{default_password}}\",\n      \"pscSsoSpec\": {\n        \"ssoDomain\": \"vsphere.local\"\n      }\n    }\n  ],\n  \"vcenterSpec\": {\n      \"vcenterIp\": \"{{vc_mgmt_ip}}\",\n      \"vcenterHostname\": \"{{vc_mgmt_hostname_short}}\",\n      \"vcenterId\": \"{{vc_spec_name}}\",\n      \"licenseFile\": \"{{vc_licensekey}}\",\n      \"vmSize\": \"{{vc_vmsize}}\",\n      \"storageSize\": \"{{vc_storagesize}}\",\n      \"rootVcenterPassword\": \"{{default_password}}\"\n  },\n  \"hostSpecs\": [\n    {\n      \"association\": \"{{vc_datacenter_name}}\",\n      \"ipAddressPrivate\": {\n        \"ipAddress\": \"{{host1_mgmt_ip}}\"\n      },\n      \"hostname\": \"{{host1_hostname_short}}\",\n      \"credentials\": {\n        \"username\": \"root\",\n        \"password\": \"{{default_password}}\"\n      },\n      \"vSwitch\": \"{{esxi_vss_name}}\",\n      \"serverId\": \"{{host1_server_id}}\"\n    },\n    {\n      \"association\": \"{{vc_datacenter_name}}\",\n      \"ipAddressPrivate\": {\n        \"ipAddress\": \"{{host2_mgmt_ip}}\"\n      },\n      \"hostname\": \"{{host2_hostname_short}}\",\n      \"credentials\": {\n        \"username\": \"root\",\n        \"password\": \"{{default_password}}\"\n      },\n      \"vSwitch\": \"{{esxi_vss_name}}\",\n      \"serverId\": \"{{host2_server_id}}\"\n    },\n    {\n      \"association\": \"{{vc_datacenter_name}}\",\n      \"ipAddressPrivate\": {\n        \"ipAddress\": \"{{host3_mgmt_ip}}\"\n      },\n      \"hostname\": \"{{host3_hostname_short}}\",\n      \"credentials\": {\n        \"username\": \"root\",\n        \"password\": \"{{default_password}}\"\n      },\n      \"vSwitch\": \"{{esxi_vss_name}}\",\n      \"serverId\": \"{{host3_server_id}}\"\n    },\n    {\n      \"association\": \"{{vc_datacenter_name}}\",\n      \"ipAddressPrivate\": {\n        \"ipAddress\": \"{{host4_mgmt_ip}}\"\n      },\n      \"hostname\": \"{{host4_hostname_short}}\",\n      \"credentials\": {\n        \"username\": \"root\",\n        \"password\": \"{{default_password}}\"\n      },\n      \"vSwitch\": \"{{esxi_vss_name}}\",\n      \"serverId\": \"{{host4_server_id}}\"\n    }\n  ],\n  \"excludedComponents\": [\"AVN\", \"EBGP\"]\n}"
+						},
+						"url": "{{CB_URL}}/v1/sddcs/validations/"
+					},
+					"response": []
+				},
+				{
+					"name": "Deploy SDDC JSON",
+					"id": "afd74ed0-123a-4548-bd23-845e2d7643b4",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"password": "F@tality123!",
+								"username": "admin"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"skipEsxThumbprintValidation\": true,\n  \"managementPoolName\": \"{{np1_mgmt}}\",\n  \"sddcManagerSpec\": {\n    \"secondUserCredentials\": {\n      \"username\": \"vcf\",\n      \"password\": \"{{default_password}}\"\n    },\n    \"ipAddress\": \"{{sddcm_ip}}\",\n    \"netmask\": \"{{sddcm_subnet}}\",\n    \"hostname\": \"{{sddcm_host_short}}\",\n    \"licenseKey\": \"{{sddcm_licensekey}}\",\n    \"rootUserCredentials\": {\n      \"username\": \"root\",\n      \"password\": \"{{default_password}}\"\n    },\n    \"localUserPassword\": \"{{default_password}}\",\n    \"vcenterId\": \"{{mgmt_vc_id}}\"\n  },\n  \"sddcId\": \"{{sddcm_sddcid}}\",\n  \"esxLicense\": \"{{esxi_license}}\",\n  \"taskName\": \"workflowconfig/workflowspec-ems.json\",\n  \"ceipEnabled\": \"{{set_ceip}}\",\n  \"fipsEnabled\": \"{{set_fips}}\",\n  \"ntpServers\": [\"{{ntps_primary}}\", \"{{ntps_secondary}}\"],\n  \"dnsSpec\": {\n    \"secondaryNameserver\": \"{{dns_secondaryns}}\",\n    \"subdomain\": \"{{dns_subdomain}}\",\n    \"domain\": \"{{dns_domainname}}\",\n    \"nameserver\": \"{{dns_primaryns}}\"\n  },\n  \"networkSpecs\": [\n    {\n      \"networkType\": \"MANAGEMENT\",\n      \"subnet\": \"{{net_mgmt_subnet}}\",\n      \"gateway\": \"{{net_mgmt_gateway}}\",\n      \"vlanId\": \"{{net_mgmt_vlan}}\",\n      \"mtu\": \"{{net_mgmt_mtu}}\",\n      \"portGroupKey\": \"{{net_mgmt_pg_name}}\",\n      \"standbyUplinks\":[],\n      \"activeUplinks\":[\n        \"uplink1\",\n        \"uplink2\"\n      ]\n    },\n    {\n      \"networkType\": \"VMOTION\",\n      \"subnet\": \"{{net_vmotion_subnet}}\",\n      \"gateway\": \"{{net_vmotion_gateway}}\",\n      \"vlanId\": \"{{net_vmotion_vlanid}}\",\n      \"mtu\": \"{{net_vmotion_mtu}}\",\n      \"portGroupKey\": \"{{net_vmotion_pg_name}}\",\n      \"association\": \"{{vc_datacenter_name}}\",\n      \"includeIpAddressRanges\": [{\"endIpAddress\": \"{{net_vmotion_ipend}}\", \"startIpAddress\": \"{{net_vmotion_ipstart}}\"}],\n      \"standbyUplinks\":[],\n      \"activeUplinks\":[\n        \"uplink1\",\n        \"uplink2\"\n      ]\n    },\n    {\n      \"networkType\": \"VSAN\",\n      \"subnet\": \"{{net_vsan_subnet}}\",\n      \"gateway\": \"{{net_vsan_gateway}}\",\n      \"vlanId\": \"{{net_vsan_vlanid}}\",\n      \"mtu\": \"{{net_vsan_mtu}}\",\n      \"portGroupKey\": \"{{net_vsan_pg_name}}\",\n      \"includeIpAddressRanges\": [{\"endIpAddress\": \"{{net_vsan_ipend}}\", \"startIpAddress\": \"{{net_vsan_ipstart}}\"}],\n      \"standbyUplinks\":[],\n      \"activeUplinks\":[\n        \"uplink1\",\n        \"uplink2\"\n      ]\n    }\n  ],\n  \"nsxtSpec\":\n  {\n    \"nsxtManagerSize\": \"{{nsxt_m_size}}\",\n    \"nsxtManagers\": [\n      {\n          \"hostname\": \"{{nsxt_m1_hostname_short}}\",\n          \"ip\": \"{{nsxt_m1_ip}}\"\n      },\n      {\n          \"hostname\": \"{{nsxt_m2_hostname_short}}\",\n          \"ip\": \"{{nsxt_m2_ip}}\"\n      },\n      {\n          \"hostname\": \"{{nsxt_m3_hostname_short}}\",\n          \"ip\": \"{{nsxt_m3_ip}}\"\n      }\n    ],\n    \"rootNsxtManagerPassword\": \"{{default_password}}\",\n    \"nsxtAdminPassword\": \"{{default_password}}\",\n    \"nsxtAuditPassword\": \"{{default_password}}\",\n    \"rootLoginEnabledForNsxtManager\": \"true\",\n    \"sshEnabledForNsxtManager\": \"true\",\n    \"overLayTransportZone\": {\n        \"zoneName\": \"{{nsxt_tz_overlayname}}\",\n        \"networkName\": \"{{nsxt_tz_overlaynetworkname}}\"\n    },\n    \"vlanTransportZone\": {\n        \"zoneName\": \"{{nsxt_tz_vlanname}}\",\n        \"networkName\": \"{{nsxt_tz_vlannetworkname}}\"\n    },\n    \"vip\": \"{{nsxt_vip_name}}\",\n    \"vipFqdn\": \"{{nsxt_vip_fqdn}}\",\n    \"nsxtLicense\": \"{{nsxt_licensekey}}\",\n    \"transportVlanId\": \"{{nsxt_htep_vlanid}}\",\n    \"ipAddressPoolSpec\": {\n       \"name\": \"{{nsxt_np2_htep_name}}\",\n       \"description\": \"{{nsxt_np2_htep_desc}}\",\n       \"subnets\":[\n          {\n             \"ipAddressPoolRanges\":[\n                {\n                   \"start\": \"{{net_htep_ipstart}}\",\n                   \"end\": \"{{net_htep_ipend}}\"\n                }\n             ],\n             \"cidr\": \"{{net_htep_cidr}}\",\n             \"gateway\": \"{{net_htep_gateway}}\"\n          }\n       ]\n    }\n  },\n  \"vsanSpec\": {\n      \"vsanName\": \"{{vsan_spec_name}}\",\n      \"licenseFile\": \"{{vsan_licensekey}}\",\n      \"vsanDedup\": \"{{set_vsan_dedupe}}\",\n      \"datastoreName\": \"{{vsan_dsname}}\"\n  },\n  \"dvSwitchVersion\": \"{{vds1_version}}\",\n  \"dvsSpecs\": [\n    {\n      \"dvsName\": \"{{vds1_dvsname}}\",\n      \"vcenterId\":\"{{vds1_vcenterid}}\",\n      \"vmnics\": [\n        \"vmnic6\",\n        \"vmnic7\"\n      ],\n      \"mtu\": \"{{vds1_mtu}}\",\n      \"networks\":[\n        \"MANAGEMENT\",\n        \"VMOTION\",\n        \"VSAN\"\n      ],\n      \"niocSpecs\":[\n        {\n          \"trafficType\":\"VSAN\",\n          \"value\":\"HIGH\"\n        },\n        {\n          \"trafficType\":\"VMOTION\",\n          \"value\":\"LOW\"\n        },\n        {\n          \"trafficType\":\"VDP\",\n          \"value\":\"LOW\"\n        },\n        {\n          \"trafficType\":\"VIRTUALMACHINE\",\n          \"value\":\"HIGH\"\n        },\n        {\n          \"trafficType\":\"MANAGEMENT\",\n          \"value\":\"NORMAL\"\n        },\n        {\n          \"trafficType\":\"NFS\",\n          \"value\":\"LOW\"\n        },\n        {\n          \"trafficType\":\"HBR\",\n          \"value\":\"LOW\"\n        },\n        {\n          \"trafficType\":\"FAULTTOLERANCE\",\n          \"value\":\"LOW\"\n        },\n        {\n          \"trafficType\":\"ISCSI\",\n          \"value\":\"LOW\"\n        }\n      ],\n      \"isUsedByNsxt\": \"{{vds1_set_isnsxt}}\"\n    }\n  ],\n  \"clusterSpec\":\n  {\n    \"clusterName\": \"{{vc_mgmt_clustername}}\",\n    \"vcenterName\": \"{{vc_spec_name}}\",\n    \"clusterEvcMode\": \"{{vc_evcmode}}\",\n    \"vmFolders\": {\n      \"MANAGEMENT\": \"{{vmfolder_mgmt}}\",\n      \"NETWORKING\": \"{{vmfolder_net}}\",\n      \"EDGENODES\": \"{{vmfolder_edge}}\"\n    },\n    \"resourcePoolSpecs\": [{\n      \"name\": \"{{rps_mgmt_name}}\",\n      \"type\": \"management\",\n      \"cpuReservationPercentage\": 0,\n      \"cpuLimit\": -1,\n      \"cpuReservationExpandable\": true,\n      \"cpuSharesLevel\": \"normal\",\n      \"cpuSharesValue\": 0,\n      \"memoryReservationMb\": 0,\n      \"memoryLimit\": -1,\n      \"memoryReservationExpandable\": true,\n      \"memorySharesLevel\": \"normal\",\n      \"memorySharesValue\": 0\n    }, {\n      \"name\": \"{{rps_mgmt_net}}\",\n      \"type\": \"network\",\n      \"cpuReservationPercentage\": 0,\n      \"cpuLimit\": -1,\n      \"cpuReservationExpandable\": true,\n      \"cpuSharesLevel\": \"normal\",\n      \"cpuSharesValue\": 0,\n      \"memoryReservationPercentage\": 0,\n      \"memoryLimit\": -1,\n      \"memoryReservationExpandable\": true,\n      \"memorySharesLevel\": \"normal\",\n      \"memorySharesValue\": 0\n    }, {\n      \"name\": \"{{rp_usr_edge}}\",\n      \"type\": \"compute\",\n      \"cpuReservationPercentage\": 0,\n      \"cpuLimit\": -1,\n      \"cpuReservationExpandable\": true,\n      \"cpuSharesLevel\": \"normal\",\n      \"cpuSharesValue\": 0,\n      \"memoryReservationPercentage\": 0,\n      \"memoryLimit\": -1,\n      \"memoryReservationExpandable\": true,\n      \"memorySharesLevel\": \"normal\",\n      \"memorySharesValue\": 0\n    }, {\n      \"name\": \"{{rp_usr_vm}}\",\n      \"type\": \"compute\",\n      \"cpuReservationPercentage\": 0,\n      \"cpuLimit\": -1,\n      \"cpuReservationExpandable\": true,\n      \"cpuSharesLevel\": \"normal\",\n      \"cpuSharesValue\": 0,\n      \"memoryReservationPercentage\": 0,\n      \"memoryLimit\": -1,\n      \"memoryReservationExpandable\": true,\n      \"memorySharesLevel\": \"normal\",\n      \"memorySharesValue\": 0\n    }]\n  },\n  \"pscSpecs\": [\n    {\n      \"pscId\": \"{{psc_spec_name}}\",\n      \"vcenterId\": \"{{vc_spec_name}}\",\n      \"adminUserSsoPassword\": \"{{default_password}}\",\n      \"pscSsoSpec\": {\n        \"ssoDomain\": \"vsphere.local\"\n      }\n    }\n  ],\n  \"vcenterSpec\": {\n      \"vcenterIp\": \"{{vc_mgmt_ip}}\",\n      \"vcenterHostname\": \"{{vc_mgmt_hostname_short}}\",\n      \"vcenterId\": \"{{vc_spec_name}}\",\n      \"licenseFile\": \"{{vc_licensekey}}\",\n      \"vmSize\": \"{{vc_vmsize}}\",\n      \"storageSize\": \"{{vc_storagesize}}\",\n      \"rootVcenterPassword\": \"{{default_password}}\"\n  },\n  \"hostSpecs\": [\n    {\n      \"association\": \"{{vc_datacenter_name}}\",\n      \"ipAddressPrivate\": {\n        \"ipAddress\": \"{{host1_mgmt_ip}}\"\n      },\n      \"hostname\": \"{{host1_hostname_short}}\",\n      \"credentials\": {\n        \"username\": \"root\",\n        \"password\": \"{{default_password}}\"\n      },\n      \"vSwitch\": \"{{esxi_vss_name}}\",\n      \"serverId\": \"{{host1_server_id}}\"\n    },\n    {\n      \"association\": \"{{vc_datacenter_name}}\",\n      \"ipAddressPrivate\": {\n        \"ipAddress\": \"{{host2_mgmt_ip}}\"\n      },\n      \"hostname\": \"{{host1_hostname_short}}\",\n      \"credentials\": {\n        \"username\": \"root\",\n        \"password\": \"{{default_password}}\"\n      },\n      \"vSwitch\": \"{{esxi_vss_name}}\",\n      \"serverId\": \"{{host2_server_id}}\"\n    },\n    {\n      \"association\": \"{{vc_datacenter_name}}\",\n      \"ipAddressPrivate\": {\n        \"ipAddress\": \"{{host3_mgmt_ip}}\"\n      },\n      \"hostname\": \"{{host1_hostname_short}}\",\n      \"credentials\": {\n        \"username\": \"root\",\n        \"password\": \"{{default_password}}\"\n      },\n      \"vSwitch\": \"{{esxi_vss_name}}\",\n      \"serverId\": \"{{host3_server_id}}\"\n    },\n    {\n      \"association\": \"{{vc_datacenter_name}}\",\n      \"ipAddressPrivate\": {\n        \"ipAddress\": \"{{host4_mgmt_ip}}\"\n      },\n      \"hostname\": \"{{host1_hostname_short}}\",\n      \"credentials\": {\n        \"username\": \"root\",\n        \"password\": \"{{default_password}}\"\n      },\n      \"vSwitch\": \"{{esxi_vss_name}}\",\n      \"serverId\": \"{{host4_server_id}}\"\n    }\n  ],\n  \"excludedComponents\": [\"AVN\", \"EBGP\"]\n}"
+						},
+						"url": "{{CB_URL}}/v1/sddcs/"
+					},
+					"response": []
+				}
+			],
+			"id": "fa97529e-0020-4518-a470-b47b4ceb4fb3"
+		},
+		{
+			"name": "SDDC Manager",
+			"item": [
+				{
+					"name": "Edges",
+					"item": [
+						{
+							"name": "Validate Edge Cluster",
+							"id": "f168c7ac-a3cd-4676-9000-7a9a7a51f1dd",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"edgeClusterName\" : \"{{edge_cluster_name}}\",\n  \"edgeClusterType\" : \"{{edge_cluster_type}}\",\n  \"edgeRootPassword\" : \"{{edge_cluster_root_password}}\",\n  \"edgeAdminPassword\" : \"{{edge_cluster_admin_password}}\",\n  \"edgeAuditPassword\" : \"{{edge_cluster_audit_password}}\",\n  \"edgeFormFactor\" : \"LARGE\",\n  \"tier0ServicesHighAvailability\" : \"ACTIVE_ACTIVE\",\n  \"mtu\" : 9000,\n  \"asn\" : 65532,\n  \"edgeNodeSpecs\" : [ {\n    \"edgeNodeName\" : \"{{edge_node0_name}}\",\n    \"managementIP\" : \"{{egde_node0_mgmt_ip}}\",\n    \"managementGateway\" : \"{{edge_node0_mgmt_gateway}}\",\n    \"edgeTepGateway\" : \"{{edge_node0_tep_gateway}}\",\n    \"edgeTep1IP\" : \"{{edge_node0_tep_ip1}}\",\n    \"edgeTep2IP\" : \"{{edge_node0_tep_ip2}}\",\n    \"edgeTepVlan\" : 1006,\n    \"clusterId\" : \"{{sddc_dc_id}}\",\n    \"interRackCluster\" : false,\n    \"uplinkNetwork\" : [ {\n      \"uplinkVlan\" : 1004,\n      \"uplinkInterfaceIP\" : \"{{edge_node0_uplink_interface0_ip}}\",\n      \"peerIP\" : \"{{edge_node0_peer0_ip}}\",\n      \"asnPeer\" : 65530,\n      \"bgpPeerPassword\" : \"\"\n    }, {\n      \"uplinkVlan\" : 1005,\n      \"uplinkInterfaceIP\" : \"{{edge_node0_uplink_interface1_ip}}\",\n      \"peerIP\" : \"{{edge_node0_peer1_ip}}\",\n      \"asnPeer\" : 65530,\n      \"bgpPeerPassword\" : \"\"\n    } ]\n  }, {\n    \"edgeNodeName\" : \"{{edge_node1_name}}\",\n    \"managementIP\" : \"{{edge_node1_mgmt_ip}}\",\n    \"managementGateway\" : \"{{edge_node1_mgmt_gateway}}\",\n    \"edgeTepGateway\" : \"{{edge_node1_tep_gateway}}\",\n    \"edgeTep1IP\" : \"{{edge_node1_tep_ip1}}\",\n    \"edgeTep2IP\" : \"{{edge_node1_tep_ip2}}\",\n    \"edgeTepVlan\" : 1006,\n    \"clusterId\" : \"{{sddc_dc_id}}\",\n    \"interRackCluster\" : false,\n    \"uplinkNetwork\" : [ {\n      \"uplinkVlan\" : 1004,\n      \"uplinkInterfaceIP\" : \"{{edge_node1_uplink_interface0_ip}}\",\n      \"peerIP\" : \"{{edge_node1_peer0_ip}}\",\n      \"asnPeer\" : 65530,\n      \"bgpPeerPassword\" : \"\"\n    }, {\n      \"uplinkVlan\" : 1005,\n      \"uplinkInterfaceIP\" : \"{{edge_node1_uplink_interface1_ip}}\",\n      \"peerIP\" : \"{{edge_node1_peer1_ip}}\",\n      \"asnPeer\" : 65530,\n      \"bgpPeerPassword\" : \"\"\n    } ]\n  } ],\n  \"tier0RoutingType\" : \"{{edge_node_tier0_routing_type}}\",\n  \"tier0Name\" : \"{{edge_node_tier0_name}}\",\n  \"tier1Name\" : \"{{edge_node_tier1_name}}\",\n  \"edgeClusterProfileType\" : \"DEFAULT\"\n}"
+								},
+								"url": "{{SDDC_URL}}/v1/edge-clusters/validations/"
+							},
+							"response": []
+						},
+						{
+							"name": "Deploy Edge Cluster",
+							"id": "85b3404b-86ae-4eb2-af98-24a61915d958",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"edgeClusterName\" : \"{{edge_cluster_name}}\",\n  \"edgeClusterType\" : \"{{edge_cluster_type}}\",\n  \"edgeRootPassword\" : \"{{edge_cluster_root_password}}\",\n  \"edgeAdminPassword\" : \"{{edge_cluster_admin_password}}\",\n  \"edgeAuditPassword\" : \"{{edge_cluster_audit_password}}\",\n  \"edgeFormFactor\" : \"LARGE\",\n  \"tier0ServicesHighAvailability\" : \"ACTIVE_ACTIVE\",\n  \"mtu\" : 9000,\n  \"asn\" : 65532,\n  \"edgeNodeSpecs\" : [ {\n    \"edgeNodeName\" : \"{{edge_node0_name}}\",\n    \"managementIP\" : \"{{egde_node0_mgmt_ip}}\",\n    \"managementGateway\" : \"{{edge_node0_mgmt_gateway}}\",\n    \"edgeTepGateway\" : \"{{edge_node0_tep_gateway}}\",\n    \"edgeTep1IP\" : \"{{edge_node0_tep_ip1}}\",\n    \"edgeTep2IP\" : \"{{edge_node0_tep_ip2}}\",\n    \"edgeTepVlan\" : 1006,\n    \"clusterId\" : \"{{sddc_dc_id}}\",\n    \"interRackCluster\" : false,\n    \"uplinkNetwork\" : [ {\n      \"uplinkVlan\" : 1004,\n      \"uplinkInterfaceIP\" : \"{{edge_node0_uplink_interface0_ip}}\",\n      \"peerIP\" : \"{{edge_node0_peer0_ip}}\",\n      \"asnPeer\" : 65530,\n      \"bgpPeerPassword\" : \"\"\n    }, {\n      \"uplinkVlan\" : 1005,\n      \"uplinkInterfaceIP\" : \"{{edge_node0_uplink_interface1_ip}}\",\n      \"peerIP\" : \"{{edge_node0_peer1_ip}}\",\n      \"asnPeer\" : 65530,\n      \"bgpPeerPassword\" : \"\"\n    } ]\n  }, {\n    \"edgeNodeName\" : \"{{edge_node1_name}}\",\n    \"managementIP\" : \"{{edge_node1_mgmt_ip}}\",\n    \"managementGateway\" : \"{{edge_node1_mgmt_gateway}}\",\n    \"edgeTepGateway\" : \"{{edge_node1_tep_gateway}}\",\n    \"edgeTep1IP\" : \"{{edge_node1_tep_ip1}}\",\n    \"edgeTep2IP\" : \"{{edge_node1_tep_ip2}}\",\n    \"edgeTepVlan\" : 1006,\n    \"clusterId\" : \"{{sddc_dc_id}}\",\n    \"interRackCluster\" : false,\n    \"uplinkNetwork\" : [ {\n      \"uplinkVlan\" : 1004,\n      \"uplinkInterfaceIP\" : \"{{edge_node1_uplink_interface0_ip}}\",\n      \"peerIP\" : \"{{edge_node1_peer0_ip}}\",\n      \"asnPeer\" : 65530,\n      \"bgpPeerPassword\" : \"\"\n    }, {\n      \"uplinkVlan\" : 1005,\n      \"uplinkInterfaceIP\" : \"{{edge_node1_uplink_interface1_ip}}\",\n      \"peerIP\" : \"{{edge_node1_peer1_ip}}\",\n      \"asnPeer\" : 65530,\n      \"bgpPeerPassword\" : \"\"\n    } ]\n  } ],\n  \"tier0RoutingType\" : \"{{edge_node_tier0_routing_type}}\",\n  \"tier0Name\" : \"{{edge_node_tier0_name}}\",\n  \"tier1Name\" : \"{{edge_node_tier1_name}}\",\n  \"edgeClusterProfileType\" : \"DEFAULT\"\n}"
+								},
+								"url": "{{SDDC_URL}}/v1/edge-clusters/"
+							},
+							"response": []
+						}
+					],
+					"id": "e53c08d9-24f9-42a6-8d12-cbcf28509daa"
+				},
+				{
+					"name": "AVN",
+					"item": [
+						{
+							"name": "Validate AVN",
+							"id": "7a523828-b519-4188-9f70-c563a5c0b2e1",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer etYWRta...."
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"edgeClusterId\" : \"{{SDDC_EC_ID}}\",\n  \"avns\" : [ {\n    \"name\" : \"{{avn0_name}}\",\n    \"regionType\" : \"{{avn0_region}}\",\n    \"subnet\" : \"{{avn0_subnet}}\",\n    \"subnetMask\" : \"{{avn0_subnet_mask}}\",\n    \"gateway\" : \"{{avn0_gateway}}\",\n    \"mtu\" : 9000,\n    \"routerName\" : \"{{avn0_router_name}}\"\n  }, {\n    \"name\" : \"{{avn1_name}}\",\n    \"regionType\" : \"{{avn1_region}}\",\n    \"subnet\" : \"{{avn1_subnet}}\",\n    \"subnetMask\" : \"{{avn1_subnet_mask}}\",\n    \"gateway\" : \"{{avn1_gateway}}\",\n    \"mtu\" : 9000,\n    \"routerName\" : \"{{avn1_router_name}}\"\n  } ]\n}"
+								},
+								"url": "{{SDDC_URL}}/v1/avns/validations"
+							},
+							"response": []
+						},
+						{
+							"name": "Deploy AVN",
+							"id": "05cbaf43-5805-4745-8460-c717db6cef07",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer etYWRta...."
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"edgeClusterId\" : \"{{SDDC_EC_ID}}\",\n  \"avns\" : [ {\n    \"name\" : \"{{avn0_name}}\",\n    \"regionType\" : \"{{avn0_region}}\",\n    \"subnet\" : \"{{avn0_subnet}}\",\n    \"subnetMask\" : \"{{avn0_subnet_mask}}\",\n    \"gateway\" : \"{{avn0_gateway}}\",\n    \"mtu\" : 9000,\n    \"routerName\" : \"{{avn0_router_name}}\"\n  }, {\n    \"name\" : \"{{avn1_name}}\",\n    \"regionType\" : \"{{avn1_region}}\",\n    \"subnet\" : \"{{avn1_subnet}}\",\n    \"subnetMask\" : \"{{avn1_subnet_mask}}\",\n    \"gateway\" : \"{{avn1_gateway}}\",\n    \"mtu\" : 9000,\n    \"routerName\" : \"{{avn1_router_name}}\"\n  } ]\n}"
+								},
+								"url": "{{SDDC_URL}}/v1/avns/"
+							},
+							"response": []
+						}
+					],
+					"id": "0b28821a-e815-40ad-a6db-ce0094c93cba"
+				},
+				{
+					"name": "Create Token",
+					"id": "c2a59d0f-e77b-4c17-b1ff-7730dbebd5df",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\" : \"administrator@vsphere.local\",\n  \"password\" : \"{{token_password}}\"\n}"
+						},
+						"url": "{{SDDC_URL}}/v1/tokens"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Clusters",
+					"id": "c6dae985-dca0-42c3-8495-3659a6b7d502",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer etYWRta...."
+							}
+						],
+						"url": "{{SDDC_URL}}/v1/clusters"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Edge Clusters",
+					"id": "465b6071-d210-4944-aa3f-cb13edf24539",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{SDDC_URL}}/v1/edge-clusters"
+					},
+					"response": []
+				},
+				{
+					"name": "Deploy vRSLCM",
+					"id": "460cf9bb-9198-4b7a-a97b-481c9d5d5ec4",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"apiPassword\": \"{{default_password}}\",\r\n    \"fqdn\": \"{{vrslcm_url}}\",\r\n    \"nsxtStandaloneTier1Ip\": \"{{vrslcm_tier1_ip}}\",\r\n    \"sshPassword\": \"{{default_password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "fa19020a-5b0d-4da2-ac37-104d34147a72",
+			"auth": {
+				"type": "bearer",
+				"bearer": {
+					"token": "{{SDDC_Token}}"
+				}
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "265526a0-2de6-4103-8385-c97eb462b2b3",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "7e6a7be7-7cb1-4daa-926a-07c13a6717d7",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "4af530da-0ffb-4b68-af3c-5e968f6a3711",
+				"type": "text/javascript",
+				"exec": [
+					"pm.sendRequest(\"https://postman-echo.com/get\", function (err, response) {",
+					"    console.log(response.json());",
+					"});"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "244b0207-af06-4581-81e2-2e021f75dddf",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
