@@ -203,7 +203,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"edgeClusterId\" : \"{{SDDC_EC_ID}}\",\n  \"avns\" : [ {\n    \"name\" : \"{{avn0_name}}\",\n    \"regionType\" : \"{{avn0_region}}\",\n    \"subnet\" : \"{{avn0_subnet}}\",\n    \"subnetMask\" : \"{{avn0_subnet_mask}}\",\n    \"gateway\" : \"{{avn0_gateway}}\",\n    \"mtu\" : 9000,\n    \"routerName\" : \"{{avn0_router_name}}\"\n  }, {\n    \"name\" : \"{{avn1_name}}\",\n    \"regionType\" : \"{{avn1_region}}\",\n    \"subnet\" : \"{{avn1_subnet}}\",\n    \"subnetMask\" : \"{{avn1_subnet_mask}}\",\n    \"gateway\" : \"{{avn1_gateway}}\",\n    \"mtu\" : 9000,\n    \"routerName\" : \"{{avn1_router_name}}\"\n  } ]\n}"
+									"raw": "{\n  \"edgeClusterId\" : \"{{sddc_ec_id}}\",\n  \"avns\" : [ {\n    \"name\" : \"{{avn0_name}}\",\n    \"regionType\" : \"{{avn0_region}}\",\n    \"subnet\" : \"{{avn0_subnet}}\",\n    \"subnetMask\" : \"{{avn0_subnet_mask}}\",\n    \"gateway\" : \"{{avn0_gateway}}\",\n    \"mtu\" : 9000,\n    \"routerName\" : \"{{avn0_router_name}}\"\n  }, {\n    \"name\" : \"{{avn1_name}}\",\n    \"regionType\" : \"{{avn1_region}}\",\n    \"subnet\" : \"{{avn1_subnet}}\",\n    \"subnetMask\" : \"{{avn1_subnet_mask}}\",\n    \"gateway\" : \"{{avn1_gateway}}\",\n    \"mtu\" : 9000,\n    \"routerName\" : \"{{avn1_router_name}}\"\n  } ]\n}"
 								},
 								"url": "{{SDDC_URL}}/v1/avns/validations"
 							},
